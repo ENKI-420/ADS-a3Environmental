@@ -1321,7 +1321,7 @@ export class DataIntegrationHub implements Agent {
 
   private generateDataVisualizations(data: any) {
     return {
-      dashboardUrl: `https://dashboard.a3e.com/realtime/${uuidv4()}`,
+              dashboardUrl: `https://web-bice-two-75.vercel.app/analytics/${uuidv4()}`,
       widgets: [
         { type: 'gauge', metric: 'Air Quality Index', value: data.regulatory?.airQualityIndex },
         { type: 'timeseries', metric: 'PM2.5 Levels', data: 'realtime' },
@@ -1400,7 +1400,7 @@ export class ClientSelfServiceEngine implements Agent {
 
   private async generateClientDashboard(clientId: string, projectIds: string[]) {
     return {
-      dashboardUrl: `https://portal.a3e.com/client/${clientId}/dashboard`,
+              dashboardUrl: `https://web-bice-two-75.vercel.app/portal/${clientId}/dashboard`,
       widgets: [
         {
           type: 'project_overview',

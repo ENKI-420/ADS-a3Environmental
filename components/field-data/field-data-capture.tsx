@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-  import { useState, useRef, useEffect } from "react"
+  import { useState, useRef } from "react"
   import { useAuth } from "@/context/auth-context"
   import { Button } from "@/components/ui/button"
   import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
@@ -36,6 +36,7 @@ import type React from "react"
     Camera as CameraIcon
   } from "lucide-react"
   import { OrchestrationEngine } from "@/lib/iris-orchestrator"
+  import { browserAPI, fileUtils, type TechnicalSummary, type ProcessingStep } from "@/lib/utils"
 
   interface PhotoMetadata {
     fileName: string
@@ -78,8 +79,8 @@ import type React from "react"
       medium: number
       low: number
     }
-    technicalSummary?: any
-    processingSteps?: any[]
+    technicalSummary?: TechnicalSummary
+    processingSteps?: ProcessingStep[]
   }
 
   interface ProcessingProgress {
@@ -103,30 +104,23 @@ import type React from "react"
     const [activeTab, setActiveTab] = useState<string>("capture")
     const fileInputRef = useRef<HTMLInputElement>(null)
 
-    const validateFile = (file: File): string | null => {
-      const supportedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/heic', 'image/heif', 'image/tiff', 'image/webp']
-
-      if (!supportedTypes.includes(file.type.toLowerCase())) {
-        return `Unsupported file type: ${file.type}. Supported formats: JPEG, PNG, HEIC, HEIF, TIFF, WebP`
-      }
-      if (file.size > 50 * 1024 * 1024) {
-        return "File size must be less than 50MB"
-      }
-      if (file.size < 1024) {
-        return "File appears to be corrupted or too small"
-      }
-      return null
+    const validateFile = (file: File): string | undefined => {
+      const validation = fileUtils.validateImageFile(file)
+      return validation.isValid ? undefined : validation.error
     }
 
     const extractBasicMetadata = async (file: File): Promise<PhotoMetadata> => {
       try {
-        // Create a more sophisticated metadata extraction preview
-        const img = new Image()
-        const objectUrl = URL.createObjectURL(file)
+        const img = browserAPI.createImage()
+        const objectUrl = browserAPI.createObjectURL(file)
+
+        if (!img || !objectUrl) {
+          throw new Error('Browser API not available')
+        }
 
         return new Promise((resolve) => {
           img.onload = () => {
-            URL.revokeObjectURL(objectUrl)
+            browserAPI.revokeObjectURL(objectUrl)
 
             // Simulate GPS detection with better heuristics
             const hasGps = Math.random() > 0.2 // 80% chance for demo
@@ -177,7 +171,7 @@ import type React from "react"
           }
 
           img.onerror = () => {
-            URL.revokeObjectURL(objectUrl)
+            browserAPI.revokeObjectURL(objectUrl)
             resolve({
               fileName: file.name,
               fileSize: file.size,
@@ -192,7 +186,7 @@ import type React from "react"
 
           img.src = objectUrl
         })
-      } catch (error) {
+      } catch {
         return {
           fileName: file.name,
           fileSize: file.size,
@@ -208,9 +202,16 @@ import type React from "react"
 
     const generateThumbnail = async (file: File): Promise<string> => {
       return new Promise((resolve) => {
-        const canvas = document.createElement('canvas')
+        const canvas = browserAPI.createElement('canvas')
+        const img = browserAPI.createImage()
+
+        if (!canvas || !img) {
+          resolve('')
+          return
+        }
+
         const ctx = canvas.getContext('2d')
-        const img = new Image()
+        const objectUrl = browserAPI.createObjectURL(file)
 
         img.onload = () => {
           const maxSize = 120
@@ -234,10 +235,18 @@ import type React from "react"
           if (ctx) {
             ctx.drawImage(img, 0, 0, width, height)
             resolve(canvas.toDataURL('image/jpeg', 0.8))
+          } else {
+            resolve('')
           }
+          browserAPI.revokeObjectURL(objectUrl)
         }
 
-        img.src = URL.createObjectURL(file)
+        img.onerror = () => {
+          browserAPI.revokeObjectURL(objectUrl)
+          resolve('')
+        }
+
+        img.src = objectUrl
       })
     }
 
@@ -255,7 +264,7 @@ import type React from "react"
         const photo: Photo = {
           id: photoId,
           file,
-          objectUrl: URL.createObjectURL(file),
+          objectUrl: browserAPI.createObjectURL(file),
           error: validationError,
           isProcessing: !validationError
         }
@@ -306,7 +315,7 @@ import type React from "react"
       setPhotos((prev) => {
         const photo = prev.find(p => p.id === id)
         if (photo) {
-          URL.revokeObjectURL(photo.objectUrl)
+          browserAPI.revokeObjectURL(photo.objectUrl)
         }
         return prev.filter((p) => p.id !== id)
       })
@@ -317,7 +326,7 @@ import type React from "react"
     }
 
     const clearAllPhotos = () => {
-      photos.forEach(photo => URL.revokeObjectURL(photo.objectUrl))
+      photos.forEach(photo => browserAPI.revokeObjectURL(photo.objectUrl))
       setPhotos([])
       setSelectedPhoto(null)
       setReport(null)
@@ -361,7 +370,10 @@ import type React from "react"
             currentStep: step,
             progress
           }))
-          await new Promise(resolve => setTimeout(resolve, 600))
+          await new Promise(resolve => {
+            const timeoutId = browserAPI.setTimeout(() => resolve(undefined), 600)
+            if (!timeoutId) resolve(undefined)
+          })
         }
 
         // Run the enhanced processing agent
@@ -381,12 +393,15 @@ import type React from "react"
           progress: 98
         }))
 
-        await new Promise(resolve => setTimeout(resolve, 300))
+        await new Promise(resolve => {
+          const timeoutId = browserAPI.setTimeout(() => resolve(undefined), 300)
+          if (!timeoutId) resolve(undefined)
+        })
 
         if (result.success && result.data.kmzBlob) {
           const kmzBlob = result.data.kmzBlob as Blob
           setReport({
-            kmzUrl: URL.createObjectURL(kmzBlob),
+            kmzUrl: browserAPI.createObjectURL(kmzBlob),
             kmzName: result.data.kmzName,
             summary: result.summary,
             fileSize: result.data.fileSize,
@@ -406,7 +421,7 @@ import type React from "react"
           }))
 
           // Switch to results tab
-          setTimeout(() => {
+          void browserAPI.setTimeout(() => {
             setActiveTab("results")
             setProcessingProgress({
               isProcessing: false,
@@ -418,7 +433,7 @@ import type React from "react"
           throw new Error(result.summary || "Enhanced processing failed")
         }
       } catch (error) {
-        console.error("Enhanced processing failed:", error)
+        browserAPI.error("Enhanced processing failed:", error)
         setError(error instanceof Error ? error.message : "Enhanced processing failed")
         setProcessingProgress({
           isProcessing: false,
@@ -428,13 +443,7 @@ import type React from "react"
       }
     }
 
-    const formatFileSize = (bytes: number): string => {
-      if (bytes === 0) return '0 Bytes'
-      const k = 1024
-      const sizes = ['Bytes', 'KB', 'MB', 'GB']
-      const i = Math.floor(Math.log(bytes) / Math.log(k))
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
-    }
+    const formatFileSize = fileUtils.formatFileSize
 
     const getQualityColor = (quality: string) => {
       switch (quality) {
@@ -1122,9 +1131,10 @@ import type React from "react"
                         <Button
                           variant="outline"
                           className="w-full h-12"
-                          onClick={() => {
+                          onClick={async () => {
                             // Create a shareable link or copy to clipboard
-                            navigator.clipboard?.writeText(window.location.href)
+                            const url = browserAPI.getCurrentUrl()
+                            await browserAPI.writeToClipboard(url)
                           }}
                         >
                           <Info className="w-5 h-5 mr-2" />

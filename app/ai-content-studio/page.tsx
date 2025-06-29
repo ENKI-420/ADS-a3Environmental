@@ -195,12 +195,12 @@ export default function AIContentStudioPage() {
           <div className="flex items-center justify-center space-x-2 mb-6">
             <Sparkles className="h-8 w-8 text-blue-600" />
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
-              A3E AI Content Studio
+              IRIS MCP SDK AI Content Studio
             </h1>
           </div>
           <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-            Leverage cutting-edge AI to streamline your content generation for marketing,
-            case studies, and thought leadership in environmental consulting.
+            Experience the power of IRIS MCP SDK's advanced content generation capabilities through
+            intelligent multi-modal AI orchestration and context-aware content creation.
           </p>
           <Badge className="mt-4 bg-emerald-100 text-emerald-800 px-4 py-2">
             <Bot className="h-4 w-4 mr-2" />
@@ -217,7 +217,7 @@ export default function AIContentStudioPage() {
               Digital Transformation Challenges
             </h2>
             <p className="text-slate-600 max-w-3xl mx-auto">
-              A3E's strong foundation requires addressing key digital gaps to enhance
+              IRIS MCP SDK's advanced foundation requires addressing key digital gaps to enhance
               stakeholder experience and drive sustainable growth.
             </p>
           </div>

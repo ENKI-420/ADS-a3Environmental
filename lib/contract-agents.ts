@@ -22,7 +22,7 @@ export class ContractAnalysisAgent implements Agent {
       { name: "Final Compliance Report", due: "Project completion" },
     ]
     const scope = `Provide Phase I & II Environmental Site Assessments for the ${params.contractName} project in accordance with ${params.contractType} regulations.`
-    const reportingRequirements = `All reports must be submitted in PDF format via the A3E Client Portal. Reports must adhere to the ${params.contractType}-specific templates.`
+    const reportingRequirements = `All reports must be submitted in PDF format via the IRIS MCP SDK Demonstration Portal. Reports must adhere to the ${params.contractType}-specific templates demonstrating IRIS MCP SDK capabilities.`
 
     const resultData = {
       contractName: params.contractName,

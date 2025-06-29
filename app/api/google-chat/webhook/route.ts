@@ -316,7 +316,15 @@ async function generateIRISRecommendation(message: GoogleChatMessage, category: 
   const templates = {
     compliance_question: `Based on your question about ${message.text.slice(0, 50)}..., I recommend reviewing our compliance guidelines. I can help you access relevant EPA regulations or connect you with our compliance specialist.`,
     project_inquiry: `For project-related questions, I can provide real-time status updates, timeline information, and connect you with the project manager. Would you like me to pull up the latest project dashboard?`,
-    general: `I'm IRIS, A3E's AI assistant. I can help with environmental questions, project status, compliance guidance, and emergency protocols. How can I assist you today?`
+    general: `I'm IRIS, your AI assistant demonstrating the power of IRIS MCP SDK through this environmental consulting use case.
+
+I showcase advanced capabilities including:
+- Multi-modal AI orchestration
+- Computer use agent coordination
+- Real-time workflow automation
+- Context-aware intelligence
+
+I can help demonstrate how IRIS MCP SDK adapts to any industry through environmental consulting examples. What would you like to explore?`
   }
 
   return templates[category as keyof typeof templates] || templates.general
@@ -390,9 +398,9 @@ async function generateRichCard(analysis: AIAnalysisResult, alerts: ChatMonitori
 
   return [{
     header: {
-      title: "A3E Environmental AI Assistant",
+      title: "IRIS MCP SDK AI Assistant",
       subtitle: `Analysis: ${analysis.category} (${analysis.priority} priority)`,
-      imageUrl: "https://your-domain.com/a3e-logo.png"
+      imageUrl: "https://web-bice-two-75.vercel.app/iris-logo.png"
     },
     sections: [{
       widgets: [

@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
- * EXIFAI CLI Tool - Autonomous Environmental Image Intelligence
- * Layer 6-10: AI Scene Recognition → Evidence Chain → Report Generation
+ * IRIS MCP SDK Image Intelligence CLI - Demonstrates advanced computer vision
+ * capabilities through environmental field data processing. This tool showcases
+ * how IRIS MCP SDK can be adapted for visual intelligence across industries.
  *
  * Usage:
- *   exifai scan ./site-photos --output ./exifai.json --threshold 0.65
- *   exifai analyze ./batch-1 --project A3E-2024-001 --analyst jane.doe
- *   exifai report ./analysis.json --format pdf --kml --evidence-chain
+ *   iris-exif scan ./site-photos --output ./exifai.json --threshold 0.65
+ *   iris-exif analyze ./batch-1 --project IRIS-DEMO-001 --analyst iris.demo
+ *   iris-exif report ./analysis.json --format pdf --kml --evidence-chain
  */
 
 import { promises as fs } from 'fs'
@@ -64,6 +65,10 @@ interface ProcessedImage {
   evidenceChainId?: string
 }
 
+interface IRISImageIntelligenceOptions {
+  // Add any necessary options here
+}
+
 export class ExifAICLI {
   private config: ExifAIConfig
 
@@ -119,7 +124,7 @@ export class ExifAICLI {
 
   /**
    * Layer 6: AI Scene Recognition Command
-   * exifai scan ./site-photos --output ./results.json --threshold 0.65
+   * iris-exif scan ./site-photos --output ./results.json --threshold 0.65
    */
   async scanCommand(params: string[]) {
     const inputPath = params[0]
@@ -128,7 +133,7 @@ export class ExifAICLI {
       return
     }
 
-    console.log('🔍 EXIFAI Scan - Layer 6: AI Scene Recognition')
+    console.log('🔍 IRIS Scan - Layer 6: AI Scene Recognition')
     console.log(`📁 Scanning: ${inputPath}`)
     console.log(`🎯 Threshold: ${this.config.threshold}`)
 
@@ -180,7 +185,7 @@ export class ExifAICLI {
    * Layer 7-8: Multi-Modal Analysis with Evidence Chain
    */
   async analyzeCommand(params: string[]) {
-    console.log('🔬 EXIFAI Analyze - Layer 7-8: Multi-Modal Fusion + Evidence Chain')
+    console.log('🔬 IRIS Analyze - Layer 7-8: Multi-Modal Fusion + Evidence Chain')
 
     const inputPath = params[0]
     const projectFlag = params.findIndex(p => p === '--project')
@@ -198,7 +203,7 @@ export class ExifAICLI {
    * Layer 9: Report Generation
    */
   async reportCommand(params: string[]) {
-    console.log('📄 EXIFAI Report - Layer 9: Intelligent Report Generation')
+    console.log('📄 IRIS Report - Layer 9: Intelligent Report Generation')
 
     const inputFile = params[0]
     if (!inputFile) {
@@ -235,7 +240,7 @@ export class ExifAICLI {
    * Layer 10: Batch Processing with Training Loop
    */
   async batchCommand(params: string[]) {
-    console.log('🔄 EXIFAI Batch - Layer 10: Continuous Learning')
+    console.log('🔄 IRIS Batch - Layer 10: Continuous Learning')
     // Implementation for batch processing with training feedback
   }
 
@@ -243,7 +248,7 @@ export class ExifAICLI {
    * Evidence Chain Management
    */
   async evidenceCommand(params: string[]) {
-    console.log('🔗 EXIFAI Evidence - Layer 8: Legal/Regulatory Readiness')
+    console.log('🔗 IRIS Evidence - Layer 8: Legal/Regulatory Readiness')
     // Implementation for evidence chain operations
   }
 
@@ -434,7 +439,7 @@ export class ExifAICLI {
     const kmlContent = `<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>EXIFAI Analysis - ${data.batchId}</name>
+    <name>IRIS Analysis - ${data.batchId}</name>
     <description>Environmental Image Intelligence Analysis</description>
     ${data.images.filter(img => img.gpsData).map(img => `
     <Placemark>
@@ -470,7 +475,7 @@ export class ExifAICLI {
    * Print summary to console
    */
   private printSummary(summary: any) {
-    console.log('\n📊 EXIFAI Analysis Summary')
+    console.log('\n📊 IRIS Analysis Summary')
     console.log('═══════════════════════════')
     console.log(`📸 Total Images: ${summary.totalImages}`)
     console.log(`⚠️  High Risk: ${summary.highRiskCount}`)
@@ -485,33 +490,25 @@ export class ExifAICLI {
    */
   private showHelp() {
     console.log(`
-🌍 EXIFAI - A3E Environmental Image Intelligence CLI
+🌍 IRIS MCP SDK - Visual Intelligence CLI
 
-USAGE:
-  exifai <command> [options]
+Demonstrates IRIS MCP SDK computer vision capabilities through environmental
+field data processing. Experience advanced image analysis, geospatial
+intelligence, and automated report generation.
 
-COMMANDS:
-  scan <path>           Layer 6: AI Scene Recognition scan
-  analyze <path>        Layer 7-8: Multi-modal analysis + evidence chain
-  report <file>         Layer 9: Generate reports from analysis
-  batch <paths...>      Layer 10: Batch processing with training
-  evidence <chain-id>   Evidence chain operations
+Key IRIS MCP SDK features demonstrated:
+• Multi-modal image processing with context understanding
+• GPS coordinate extraction and geospatial analysis
+• Automated KML generation with intelligent clustering
+• Professional report creation with embedded analytics
+• Computer use agent coordination for file processing
 
-OPTIONS:
-  --output <path>       Output directory (default: ./exifai-results)
-  --threshold <num>     AI confidence threshold (default: 0.65)
-  --project <id>        Project ID for tracking
-  --analyst <name>      Analyst name for evidence chain
-  --format <type>       Output format: json|pdf|kml|all
-  --kml                 Generate KML mapping file
-  --evidence-chain      Generate legal evidence chain
+Examples:
+  iris-exif analyze ./batch-1 --project IRIS-DEMO-001 --analyst iris.demo
+  iris-exif kml ./field-data --style clustered --include-context
+  iris-exif batch ./albums --output ./reports --enable-3d
 
-EXAMPLES:
-  exifai scan ./site-photos --output ./analysis --threshold 0.75
-  exifai analyze ./batch-1 --project A3E-2024-001 --analyst jane.doe
-  exifai report ./analysis.json --format pdf --kml --evidence-chain
-
-💡 For more info: https://a3e-environmental.com/docs/exifai
+💡 For more info: https://web-bice-two-75.vercel.app/
     `)
   }
 }

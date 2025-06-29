@@ -97,8 +97,9 @@ Guidelines:
 - Use professional, accessible language
 - Highlight environmental benefits and compliance achievements
 - Include specific metrics where possible (cost savings, timeline improvements, etc.)
-- Emphasize A3E's expertise and value proposition
-- Make it engaging for potential clients considering similar projects
+- Emphasize IRIS MCP SDK's capabilities and versatility across industries
+- Showcase how the platform adapts to domain-specific requirements
+- Highlight computer use agents, multi-modal AI, and orchestration features
 
 Format as a cohesive narrative that showcases expertise and results.
 `
@@ -145,7 +146,7 @@ ${serviceDescription}
 
 Target Audience: ${targetAudience || 'potential environmental consulting clients'}
 
-${competitiveAdvantages ? `A3E Competitive Advantages: ${competitiveAdvantages}` : ''}
+${competitiveAdvantages ? `IRIS MCP SDK Competitive Advantages: ${competitiveAdvantages}` : ''}
 
 Create marketing copy that includes:
 1. **Compelling Headline**: Attention-grabbing title
@@ -204,21 +205,17 @@ async function callAIService(prompt: string): Promise<string> {
   // For now, we'll simulate with a mock response based on the prompt content
 
   if (prompt.includes('case study')) {
-    return `**Environmental Remediation Success at Former Industrial Site**
+    return `**Case Study Example:**
 
-A3E Environmental Consultants successfully managed the comprehensive remediation of a 15-acre former manufacturing facility, addressing decades of soil and groundwater contamination while meeting aggressive project timelines.
+    IRIS MCP SDK Platform successfully demonstrated comprehensive AI orchestration capabilities through a 15-acre environmental consulting simulation, showcasing advanced computer use agents, multi-modal processing, and intelligent workflow automation while meeting aggressive performance and scalability requirements.
 
-**Challenge:** The site contained elevated levels of petroleum hydrocarbons and heavy metals, requiring immediate action to meet regulatory deadlines and enable commercial redevelopment.
+    **Key Achievements:**
+    - 340% efficiency improvement through agent coordination
+    - $47,290/month operational cost savings via automation
+    - 65% reduction in processing time through intelligent workflows
+    - 96.7% task success rate with multi-agent orchestration
 
-**Solution:** Our team implemented a multi-phase approach combining in-situ chemical oxidation for groundwater treatment and thermal desorption for soil remediation. We worked closely with state regulators to ensure full compliance with environmental standards.
-
-**Results:**
-- 95% reduction in contaminant levels within 8 months
-- $2.3M in cost savings compared to traditional excavation methods
-- Zero regulatory violations or project delays
-- Site successfully transferred to new ownership for commercial development
-
-This project demonstrates A3E's expertise in complex remediation projects, innovative technology application, and stakeholder management. Our comprehensive approach not only addressed environmental concerns but also preserved the client's development timeline and budget.`
+    This demonstration showcases IRIS MCP SDK's expertise in complex AI orchestration, innovative technology integration, and scalable platform architecture. Our comprehensive approach addresses technical challenges while demonstrating real-world applicability across industries.`
   }
 
   if (prompt.includes('blog ideas')) {
@@ -248,25 +245,19 @@ Value Proposition: Makes compelling business case for environmental consulting s
   }
 
   if (prompt.includes('marketing copy')) {
-    return `**Transform Environmental Challenges into Competitive Advantages**
+    return `**Don't let technology limitations slow down your innovation. IRIS MCP SDK turns complex AI requirements into strategic opportunities that accelerate your development and enhance your competitive position.**
 
-Don't let environmental compliance slow down your business growth. A3E Environmental Consultants turns regulatory requirements into strategic opportunities that protect your bottom line and accelerate your projects.
+**What Sets IRIS MCP SDK Apart:**
+- Advanced Model Context Protocol for seamless AI orchestration
+- Computer use agents for direct system interaction and automation
+- Multi-modal AI processing across voice, visual, and text data
+- Enterprise-grade security and compliance features
+- Real-time agent coordination and workflow management
+- Rapid domain adaptation for any industry use case
 
-**What Sets A3E Apart:**
-• **Rapid Response Expertise**: Phase I assessments completed in 5-7 days, not weeks
-• **Regulatory Navigation**: Pre-established relationships with EPA, state, and local agencies
-• **Cost-Effective Solutions**: Innovative remediation technologies that reduce cleanup costs by 30-60%
-• **Risk Mitigation**: Comprehensive due diligence that prevents costly surprises
+Experience the future of AI platform development with IRIS MCP SDK. Our revolutionary technology transforms how you build intelligent applications, providing the foundation for next-generation AI solutions across any domain.
 
-Whether you're acquiring property, managing ongoing compliance, or addressing contamination issues, our team of certified environmental professionals delivers results that keep your projects on schedule and within budget.
-
-**Ready to Move Forward with Confidence?**
-
-Contact A3E today for a complimentary site evaluation and discover how environmental due diligence can become your competitive advantage. Our expert team is standing by to discuss your specific needs and provide immediate guidance.
-
-**Call 555-A3E-ENV1 or visit a3e-environmental.com**
-
-*Trusted by Fortune 500 companies, government agencies, and development firms across the nation.*`
+**Visit https://web-bice-two-75.vercel.app/ or explore our environmental consulting demonstration to see IRIS MCP SDK in action**`
   }
 
   // Default response

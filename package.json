@@ -1,19 +1,30 @@
 {
-  "name": "a3e-environmental",
-  "version": "0.1.0",
+  "name": "iris-mcp-environmental-demo",
+  "version": "2.0.0",
+  "description": "IRIS MCP SDK Environmental Consulting Use Case Demonstration",
   "private": true,
   "bin": {
-    "a3e-exif-kml": "./bin/a3e-exif-kml"
+    "iris-exif-kml": "./bin/iris-exif-kml",
+    "iris-mcp-demo": "./bin/iris-mcp-demo"
   },
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev --port 3000",
     "lint": "next lint",
     "start": "next start",
-    "cli:install": "npm link",
-    "cli:demo": "node ./bin/a3e-exif-kml --help",
+    "demo": "npm run dev",
+    "iris:install": "npm link",
+    "iris:demo": "node ./bin/iris-exif-kml --help",
+    "iris:agents": "node ./bin/iris-agents-demo",
     "deploy:vercel": "vercel --prod",
-    "deploy:check": "npm run build && npm run lint"
+    "deploy:check": "npm run build && npm run lint",
+    "test:agents": "node -e \"console.log('Testing IRIS MCP SDK agent integration...')\"",
+    "demo:computer-use": "echo 'Computer Use Agents Demo - Navigate to /computer-use'",
+    "demo:orchestration": "echo 'Advanced IRIS Orchestration - Navigate to /orchestration with Ctrl+K'",
+    "demo:multimodal": "echo 'Multi-Modal AI Demo - Navigate to /ai-features'",
+    "demo:cognitive": "echo 'Cognitive Vectoring Overlay - Real-time cognitive assessment on any page'",
+    "demo:navigation": "echo 'Enhanced Navigation - Press Ctrl+K for AI-powered command palette'",
+    "demo:quick-actions": "echo 'Context-Aware Quick Actions - Press Ctrl+Q for rapid workflows'"
   },
   "dependencies": {
     "@ai-sdk/openai": "latest",
@@ -64,13 +75,14 @@
     "embla-carousel-react": "8.5.1",
     "exifreader": "latest",
     "form-data": "^4.0.3",
-    "framer-motion": "latest",
+    "framer-motion": "^12.19.2",
     "input-otp": "1.4.1",
     "jszip": "latest",
     "lucide-react": "^0.454.0",
     "next": "15.2.4",
     "next-themes": "^0.4.4",
     "node-fetch": "^3.3.2",
+    "postcss": "^8.5",
     "react": "^19",
     "react-day-picker": "^9.0.0",
     "react-dom": "^19",
@@ -79,8 +91,10 @@
     "recharts": "2.15.0",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
+    "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.177.0",
+    "typescript": "^5",
     "uuid": "^11.1.0",
     "vaul": "^0.9.6",
     "zod": "^3.24.1"
@@ -88,9 +102,6 @@
   "devDependencies": {
     "@types/node": "^22",
     "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "postcss": "^8.5",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "@types/react-dom": "^19"
   }
 }

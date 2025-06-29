@@ -23,7 +23,7 @@ export function Hero() {
           Industry's First AI-Powered Environmental Consulting
         </Badge>
 
-        <h1 className="text-5xl md:text-7xl font-bold mb-6">A3 Environmental Consultants</h1>
+        <h1 className="text-5xl md:text-7xl font-bold mb-6">IRIS MCP SDK Platform</h1>
 
         <div className="max-w-4xl mx-auto mb-8">
           <h2 className="text-2xl md:text-3xl font-semibold mb-6">
@@ -64,6 +64,11 @@ export function Hero() {
             </a>
           </Button>
         </div>
+
+        <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-4xl">
+          Experience the future of AI development through our comprehensive environmental consulting demonstration.
+          See how developers, architects, and enterprises rely on IRIS MCP SDK to build next-generation intelligent applications
+        </p>
       </div>
     </section>
   )
