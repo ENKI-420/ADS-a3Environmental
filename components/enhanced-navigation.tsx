@@ -1,14 +1,13 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback } from "react"
-import { useRouter, usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
+import React, { useState, useEffect, useCallback } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import {
-  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
@@ -126,6 +125,18 @@ const navigationItems: NavigationItem[] = [
     priority: 6,
     estimatedTime: '12min',
     keywords: ['reports', 'documents', 'generation', 'analysis']
+  },
+  {
+    id: 'epa-contractor-strategy',
+    title: 'EPA Contractor Strategy',
+    description: 'Federal contracting roadmap and business plan',
+    path: '/epa-contractor-strategy',
+    category: 'admin',
+    priority: 8,
+    estimatedTime: '10min',
+    keywords: ['epa', 'federal', 'contractor', 'strategy', 'government', 'compliance'],
+    isNew: true,
+    isPremium: true
   },
   {
     id: 'contracts',
