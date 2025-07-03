@@ -184,7 +184,7 @@ export function LightningNavigation() {
   })
   const [predictiveInsights, setPredictiveInsights] = useState<PredictiveInsight[]>([])
   const [showQuickActions, setShowQuickActions] = useState(false)
-  const [currentTime, setCurrentTime] = useState(new Date())
+  const [currentTime, setCurrentTime] = useState<Date | null>(null)
   const [isImpatientMode, setIsImpatientMode] = useState(true) // Default for Tim Allen
   const [navigationSpeed, setNavigationSpeed] = useState<'lightning' | 'fast' | 'normal'>('lightning')
 
@@ -194,6 +194,8 @@ export function LightningNavigation() {
 
   // Update time for predictive analysis
   useEffect(() => {
+    // Set initial time after hydration
+    setCurrentTime(new Date())
     const timer = setInterval(() => setCurrentTime(new Date()), 30000)
     return () => clearInterval(timer)
   }, [])
@@ -288,6 +290,8 @@ export function LightningNavigation() {
 
   // Generate predictive insights for Tim Allen's workflow
   const generatePredictiveInsights = useCallback(() => {
+    if (!currentTime) return
+    
     const insights: PredictiveInsight[] = []
     const hour = currentTime.getHours()
 
@@ -391,6 +395,8 @@ export function LightningNavigation() {
 
   const getPredictedItems = (): NavigationItem[] => {
     // AI-powered predictions based on time, role, and patterns
+    if (!currentTime) return []
+    
     const hour = currentTime.getHours()
     const predictions = []
 
@@ -409,6 +415,8 @@ export function LightningNavigation() {
   }
 
   const getQuickActions = () => {
+    if (!currentTime) return []
+    
     const hour = currentTime.getHours()
     const actions = []
 

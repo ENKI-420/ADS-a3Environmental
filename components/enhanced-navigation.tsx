@@ -160,13 +160,15 @@ export function EnhancedNavigation() {
     timePatterns: {}
   })
   const [showQuickActions, setShowQuickActions] = useState(false)
-  const [currentTime, setCurrentTime] = useState(new Date())
+  const [currentTime, setCurrentTime] = useState<Date | null>(null)
 
   const router = useRouter()
   const pathname = usePathname()
 
   // Update current time for time-based predictions
   useEffect(() => {
+    // Set initial time after hydration
+    setCurrentTime(new Date())
     const timer = setInterval(() => setCurrentTime(new Date()), 60000)
     return () => clearInterval(timer)
   }, [])
@@ -242,6 +244,8 @@ export function EnhancedNavigation() {
 
   // Generate time-based predictions
   const generateTimePredictions = useCallback(() => {
+    if (!currentTime) return
+    
     const hour = currentTime.getHours()
     const predictions = []
 
