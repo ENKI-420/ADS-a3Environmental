@@ -623,14 +623,53 @@ export default function LandingPage() {
                     {/* Performance Statistics */}
                     <IRISStats />
 
-                    {/* INVESTOR SPOTLIGHT */}
-                    <section id="investor-spotlight" className="py-24 px-6 bg-slate-900">
-                        <Suspense fallback={<div>Loading investor information...</div>}>
-                            {/* <HealthLinkInvestorPitch /> */}
-                            <div className="text-center text-gray-400">
-                                <p>Investor information coming soon...</p>
+                    {/* EPA & USACE CONTRACTING SPOTLIGHT */}
+                    <section id="epa-usace-spotlight" className="py-24 px-6 bg-slate-900">
+                        <div className="max-w-5xl mx-auto text-center">
+                            <h2 className="text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
+                                EPA & USACE Federal Contracting
+                            </h2>
+                            <p className="text-xl text-gray-300 mb-8">
+                                Accelerate your compliance, risk assessment, and project delivery with AI-powered solutions tailored for EPA and USACE contractors.
+                            </p>
+                            <div className="grid md:grid-cols-2 gap-8 mb-12">
+                                <div className="bg-gradient-to-br from-blue-900/40 to-blue-700/30 rounded-2xl p-8 border border-blue-500/20 shadow-xl">
+                                    <h3 className="text-2xl font-bold text-blue-200 mb-4">EPA Contracting</h3>
+                                    <ul className="text-left text-gray-200 space-y-3">
+                                        <li>• 99.7% compliance accuracy with automated EPA database integration</li>
+                                        <li>• Pre-configured for FedConnect, SAM.gov, and SNAP marketplace</li>
+                                        <li>• 90% faster environmental assessments and emergency response</li>
+                                        <li>• SBIR eligible and ready for federal innovation funding</li>
+                                    </ul>
+                                    <div className="mt-6">
+                                        <a href="/epa-contractor-strategy">
+                                            <Button className="bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-all">
+                                                View EPA Strategy
+                                            </Button>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="bg-gradient-to-br from-green-900/40 to-green-700/30 rounded-2xl p-8 border border-green-500/20 shadow-xl">
+                                    <h3 className="text-2xl font-bold text-green-200 mb-4">USACE Contracting</h3>
+                                    <ul className="text-left text-gray-200 space-y-3">
+                                        <li>• Advanced AI for USACE project management and compliance</li>
+                                        <li>• Automated risk modeling and real-time reporting</li>
+                                        <li>• Proven track record with federal and DoD clients</li>
+                                        <li>• Full support for USACE environmental and engineering contracts</li>
+                                    </ul>
+                                    <div className="mt-6">
+                                        <a href="/contact-us">
+                                            <Button className="bg-green-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-700 transition-all">
+                                                Contact USACE Team
+                                            </Button>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </Suspense>
+                            <div className="mt-8 text-gray-400 text-lg">
+                                <span className="font-semibold text-blue-300">Federal Ready</span> • <span className="font-semibold text-green-300">USACE & EPA Aligned</span> • <span className="font-semibold text-yellow-300">SBIR & IDIQ Opportunities</span>
+                            </div>
+                        </div>
                     </section>
 
                     {/* Social Proof */}
